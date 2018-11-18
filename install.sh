@@ -47,12 +47,25 @@ if [ -d "./config/vimplus"]
 then
     cd ./config/vimplus && sh ./install.sh
     cd -
+fi
 
 # wm config
-rm ~/.Xresources
-rm ~/.i3/config
-cp config/urxvrt/Xresources ~/.Xresources
-cp config/i3/config ~/.i3/config
+echo "Select Your Window Manager?"
+select wm in "i3" "qtile" "none"
+do
+    case $wm in
+        "i3")
+            rm ~/.i3/config
+            cp config/i3/config ~/.i3/config
+            ;;
+        "qtile")
+            cp config/qtile ~/.config/
+            ;;
+        *)
+            break;;
+    esac
+    break
+done
 
 # install oh-my-zsh
 cd ~ && sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"

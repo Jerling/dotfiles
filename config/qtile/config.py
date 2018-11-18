@@ -39,7 +39,7 @@ keys=[
 
 
     #Application launchers
-    Key([sup],'Return',lazy.spawn('deepin-terminal')),
+    Key([sup],'Return',lazy.spawn('lxterminal')),
     Key([sup],'f',lazy.spawn('firefox')),
     Key([sup],'v',lazy.spawn('vmware')),
     Key([sup],'e',lazy.spawn('dde-file-manager')),
