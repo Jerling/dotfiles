@@ -137,7 +137,6 @@ Plugin 'haya14busa/incsearch.vim'
 Plugin 'mhinz/vim-startify'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'skywind3000/asyncrun.vim'
 
 call vundle#end()            
 filetype plugin indent on    
@@ -158,7 +157,7 @@ imap <F3> <ESC> :NERDTreeToggle<CR>
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Doxygen
-let g:DoxygenToolkit_authorName="李林杰, 1161676899@qq.com"
+let g:DoxygenToolkit_authorName="chxuan, 787280310@qq.com"
 let s:licenseTag = "Copyright(C)\<enter>"
 let s:licenseTag = s:licenseTag . "For free\<enter>"
 let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
@@ -175,14 +174,14 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_complete_in_comments = 1 
 let g:ycm_complete_in_strings = 1 
 "let g:ycm_cache_omnifunc = 0 
-let mapleader = " "
+let mapleader = ","
 nnoremap <leader>u :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>i :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>o :YcmCompleter GoToInclude<CR>
 nmap <F5> :YcmDiags<CR>
 
 " ctags
-set tags+=/usr/include/ctags
+set tags+=/usr/include/tags
 set tags+=~/.vim/systags
 set tags+=~/.vim/x86_64-linux-gnu-systags
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -252,12 +251,3 @@ noremap N :set hlsearch<cr>N
 noremap / :set hlsearch<cr>/
 noremap ? :set hlsearch<cr>?
 noremap * *:set hlsearch<cr>
-
-let g:asyncrun_open = 8
-" ring the bell to notify you job finished
-let g:asyncrun_bell = 1
-let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml']
-" F10 to toggle quickfix window
-nnoremap <leader>q :call asyncrun#quickfix_toggle(6)<cr>
-nnoremap <silent> <leader>m :AsyncRun -cwd=<root> make <cr>
-nnoremap <silent> <leader>r :AsyncRun g++ -Wall -O2 -std=c++11 "$(VIM_FILEPATH)" -o "/tmp/$(VIM_FILENOEXT)"  && "/tmp/$(VIM_FILENOEXT)"<cr>
