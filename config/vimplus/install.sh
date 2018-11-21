@@ -4,7 +4,7 @@ if which apt-get > /dev/null
 then
     sudo apt-get install -y python-dev python3-dev fontconfig
     var=$(sudo cat /etc/lsb-release | grep "DISTRIB_RELEASE")
-    systemVersion='DISTRIB_RELEASE=16.04'
+    systemVersion='DISTRIB_RELEASE=18.04'
     if [ $var == $systemVersion ]
     then
         sudo apt-get install -y libncurses5-dev libgnome2-dev libgnomeui-dev \
