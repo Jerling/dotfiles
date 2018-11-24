@@ -2,21 +2,21 @@
 #auto restore workspace
 #by author Jerling 2018
 
-Software="git zsh vim emacs rofi cmake global"
+SOFTWARE="git zsh vim rofi cmake global"
 
 function install_am()
 {
-    `sudo pacman -S gcc g++ adobe-source-code-pro-fonts $Software`
+    `INSTALL -S gcc g++ adobe-source-code-pro-fonts $SOFTWARE`
 }
 
 function install_dud()
 {
-    `sudo apt-get install -y build-essential $Software`
+    `INSTALL -y build-essential $SOFTWARE`
 }
 
 function install_rcf()
 {
-    `sudo yum install -y gcc gcc-c++ $Software`
+    `INSTALL -y gcc gcc-c++ $SOFTWARE`
 }
 
 echo "What is your OS?"
@@ -25,10 +25,13 @@ do
     echo $os
     case $os in
         "Arch/Manjaro")
+            INSTALL="sudo pacman -S"
             install_am;;
         "Debain/Ubuntu/Deepin")
+            INSTALL="sudo apt install -y"
             install_dud;;
         "RedHat/Centos/Fedaro")
+            INSTALL="sudo yum install -y"
             install_rcf;;
         "Over")
             break;;
@@ -40,9 +43,17 @@ do
 done
 
 # install spacemacs
-git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
-emacs &
+echo "Install spacemacs ?"
+select EMACS in "Y" "N"
+do
+    if $EMACS == "Y"
+      `INSTALL emacs`
+      git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
+      git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
+      emacs &
+    fi
+    break
+done
 
 if [ ! -d  ~/dotfiles ]
 then

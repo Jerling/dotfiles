@@ -73,6 +73,8 @@ function! UserConfig()
   vnoremap <silent>rH :<C-u>Ydv<CR>
   nnoremap <leader>rh :<C-u>Ydc<CR>
   noremap <leader>ry :<C-u>Yde<CR>
+  noremap <leader>gu :!git pull<CR>
+  noremap <leader>gA :!git add .<CR>
   " 关闭声音
   set vb t_vb=
   " set tags=./tags,tags
