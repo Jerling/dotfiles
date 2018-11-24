@@ -2,7 +2,7 @@
 #auto restore workspace
 #by author Jerling 2018
 
-SOFTWARE="git zsh vim rofi cmake global"
+SOFTWARE="git zsh vim tmux rofi cmake global"
 
 function install_am()
 {
@@ -63,9 +63,10 @@ fi
 # install space-vim
 bash <(curl -fsSL https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)
 rm -rf ~/.spacevim
-cp ~/dotfile/config/spacevim ~/.spacevim
-vim
-cp ~/dotfiles/config/org.snippets ~/.vim/plugged/org-snippets/snippets
+ln -s -f ~/dotfile/config/spacevim ~/.spacevim
+ln -s -f  ~/dotfiles/config/org.snippets ~/.vim/plugged/org-snippets/snippets
+ln -s -f ~/dotfiles/config/tmux/.tmux.conf ~
+cp ~/dotfiles/config/tmux/.tmux.conf.local ~
 
 # wm config
 echo "Select Your Window Manager?"
