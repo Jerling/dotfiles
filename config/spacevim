@@ -14,6 +14,7 @@ let g:spacevim_plug_home = '~/.vim/plugged'
 let g:spacevim_layers = [
       \ 'fzf', 'better-defaults', 'which-key',
       \ 'ycmd',
+      \ 'tmux',
       \ 'c-c++',
       \ 'git',
       \ 'ctrlp',
