@@ -44,12 +44,17 @@ git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
 git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
 emacs &
 
-git clone https://github.com/Jerling/dotfiles.git
-if [ -d "./dotfiles/config/vimplus" ]
+if [ ! -d  ~/dotfiles ]
 then
-    cd ./dotfiles/config/vimplus && sh ./install.sh
-    cd -
+  git https://github.com/Jerling/dotfiles.git ~/dotfiles
 fi
+
+# install space-vim
+bash <(curl -fsSL https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)
+rm -rf ~/.spacevim
+cp ~/dotfile/config/spacevim ~/.spacevim
+vim
+cp ~/dotfiles/config/org.snippets ~/.vim/plugged/org-snippets/snippets
 
 # wm config
 echo "Select Your Window Manager?"

@@ -1,0 +1,60 @@
+# @file org.snippets
+# @brief org-snippets for vim
+# @author 李林杰, 1161676899@qq.com
+# @version 0.0.1
+# @date 2018-11-24
+# snippet for orgmode
+
+# heads
+snippet h1
+	* ${1}
+snippet h2
+	** ${1}
+snippet h3
+	*** ${1}
+snippet h4
+	**** ${1}
+snippet h5
+	***** ${1}
+snippet h6
+	****** ${1}
+snippet h7
+	******* ${1}
+
+# fonts
+snippet *
+	 *${1:粗体}* ${2}
+snippet /
+	 /${1:斜体}/ ${2}
+snippet _
+	 _${1:下划}_ ${2}
+snippet +
+	 +${1:删除}+ ${2}
+snippet =
+	 =${1:等宽}= ${2}
+
+# meta data
+snippet s
+	#+begin_src ${1}
+	#+end_src
+snippet e
+	#+BEGIN_EXAMPLE ${1}
+	#end_example
+snippet q
+	#+begin_queto ${1}
+	#+end_src
+snippet v
+	#+begin_verse ${1}
+	#+end_verse
+snippet c
+	#+begin_center ${1}
+	#+end_center
+snippet l
+	#+begin_latex ${1}
+	#+end_latex
+snippet	h
+	#+begin_html ${1}
+	#+end_html
+snippet #
+	#+begin_comment ${1}
+	#+end_comment
