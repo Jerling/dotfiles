@@ -47,23 +47,25 @@ echo "Install spacemacs ?"
 select EMACS in "Y" "N"
 do
     if $EMACS == "Y"
+    then
       `INSTALL emacs`
       git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
       git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
       emacs &
+    else
+        break
     fi
-    break
 done
 
 if [ ! -d  ~/dotfiles ]
 then
-  git https://github.com/Jerling/dotfiles.git ~/dotfiles
+  git clone https://github.com/Jerling/dotfiles.git ~/dotfiles
 fi
 
 # install space-vim
-bash <(curl -fsSL https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)
+git clone https://github.com/liuchengxu/space-vim/ .space-vim && bash .space-vim/install.sh
 rm -rf ~/.spacevim
-ln -s -f ~/dotfile/config/spacevim ~/.spacevim
+ln -s -f ~/dotfile/config/spacevim ~/.spacevim && vim
 ln -s -f  ~/dotfiles/config/org.snippets ~/.vim/plugged/org-snippets/snippets
 ln -s -f ~/dotfiles/config/tmux/.tmux.conf ~
 cp ~/dotfiles/config/tmux/.tmux.conf.local ~
