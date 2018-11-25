@@ -2,21 +2,21 @@
 #auto restore workspace
 #by author Jerling 2018
 
-SOFTWARE="git zsh vim tmux rofi cmake global"
+SOFTWARE="git zsh vim tmux rofi cmake make"
 
 function install_am()
 {
-    `INSTALL -S gcc g++ adobe-source-code-pro-fonts $SOFTWARE`
+    `$INSTALL gcc adobe-source-code-pro-fonts $SOFTWARE`
 }
 
 function install_dud()
 {
-    `INSTALL -y build-essential $SOFTWARE`
+    `$INSTALL -y build-essential $SOFTWARE`
 }
 
 function install_rcf()
 {
-    `INSTALL -y gcc gcc-c++ $SOFTWARE`
+    `$INSTALL -y gcc gcc-c++ $SOFTWARE`
 }
 
 echo "What is your OS?"
@@ -26,7 +26,7 @@ do
     case $os in
         "Arch/Manjaro")
             INSTALL="sudo pacman -S"
-            install_am;;
+            install_am && yourt -S global;;
         "Debain/Ubuntu/Deepin")
             INSTALL="sudo apt install -y"
             install_dud;;
@@ -46,27 +46,31 @@ done
 echo "Install spacemacs ?"
 select EMACS in "Y" "N"
 do
-    if $EMACS == "Y"
-    then
-      `INSTALL emacs`
-      git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-      git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
-      emacs &
-    else
-        break
-    fi
+    case $EMACS in
+        "Y")
+            `INSTALL emacs`
+            git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
+            git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
+            emacs &
+            ;;
+        "N")
+            break;;
+        *)
+            break;;
+    esac
+    break
 done
 
 if [ ! -d  ~/dotfiles ]
 then
-  git clone https://github.com/Jerling/dotfiles.git ~/dotfiles
+    git clone https://github.com/Jerling/dotfiles.git ~/dotfiles
 fi
 
 # install space-vim
 git clone https://github.com/liuchengxu/space-vim/ .space-vim && bash .space-vim/install.sh
-rm -rf ~/.spacevim
-ln -s -f ~/dotfile/config/spacevim ~/.spacevim && vim
-ln -s -f  ~/dotfiles/config/org.snippets ~/.vim/plugged/org-snippets/snippets
+rm -f ~/.spacevim
+ln -s -f ~/dotfiles/config/spacevim ~/.spacevim && vim
+cp -f ~/dotfiles/config/snippets ~/.vim/plugged/org-snippets/snippets
 ln -s -f ~/dotfiles/config/tmux/.tmux.conf ~
 cp ~/dotfiles/config/tmux/.tmux.conf.local ~
 
