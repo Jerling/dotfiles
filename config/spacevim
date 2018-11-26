@@ -124,5 +124,5 @@ function! UserConfig()
   endfunc
   autocmd BufNewFile * normal G
   " If your terminal(-emulator) supports true colors, uncomment the line below
-  call s:enable_termgui()
+  " call s:enable_termgui()
 endfunction
