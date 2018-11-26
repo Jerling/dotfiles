@@ -16,6 +16,7 @@ let g:spacevim_layers = [
       \ 'ycmd',
       \ 'tmux',
       \ 'c-c++',
+      \ 'python',
       \ 'git',
       \ 'ctrlp',
       \ 'editing',
@@ -49,6 +50,7 @@ function! UserInit()
   Plug 'itchyny/calendar.vim'
   Plug 'jsfaint/gen_tags.vim'
   Plug 'vim-scripts/DoxygenToolkit.vim'
+  Plug 'codeindulgence/vim-tig'
 
 endfunction
 
@@ -74,8 +76,14 @@ function! UserConfig()
   vnoremap <silent>rH :<C-u>Ydv<CR>
   nnoremap <leader>rh :<C-u>Ydc<CR>
   noremap <leader>ry :<C-u>Yde<CR>
+  "配置git
   noremap <leader>gu :!git pull<CR>
-  noremap <leader>gA :!git add .<CR>
+  noremap <leader>gS :Tig<Cr>
+  "配置snippet触发键
+  let g:UltiSnipsExpandTrigger="<C-l>"
+  "检查shell脚本是否存在问题
+  noremap <leader>sk :!shellcheck %<CR>
+
   " 关闭声音
   set vb t_vb=
   " set tags=./tags,tags
@@ -90,29 +98,25 @@ function! UserConfig()
   let g:DoxygenToolkit_commentType="Qt"
 
   " create file settings
-  autocmd BufNewFile *.cpp,*.cc,*.c,*.hpp,*.h,*.sh,*.py exec ":call SetTitle()"
+  autocmd BufNewFile *.cpp,*.cc,*.c,*.hpp,*.h,*.sh exec ":call SetTitle()"
   func SetTitle()
     if expand("%:e") == 'sh'
       call setline(1,"\#!/bin/bash")
       call append(line("."), "")
-      elseif expand("%:e") == 'py'
-          call setline(1,"#!/usr/bin/env python")
-          call append(line("."),"# coding=utf-8")
-        call append(line(".")+1, "")
-      elseif expand("%:e") == 'cpp'
+    elseif expand("%:e") == 'cpp'
       call setline(1,"#include <iostream>")
       call append(line("."), "")
-      elseif expand("%:e") == 'cc'
+    elseif expand("%:e") == 'cc'
       call setline(1,"#include <iostream>")
       call append(line("."), "")
-      elseif expand("%:e") == 'c'
+    elseif expand("%:e") == 'c'
       call setline(1,"#include <stdio.h>")
       call append(line("."), "")
-      elseif expand("%:e") == 'h'
+    elseif expand("%:e") == 'h'
       call setline(1, "#ifndef _".toupper(expand("%:r"))."_H")
       call setline(2, "#define _".toupper(expand("%:r"))."_H")
       call setline(3, "#endif")
-      elseif expand("%:e") == 'hpp'
+    elseif expand("%:e") == 'hpp'
       call setline(1, "#ifndef _".toupper(expand("%:r"))."_H")
       call setline(2, "#define _".toupper(expand("%:r"))."_H")
       call setline(3, "#endif")
@@ -120,5 +124,5 @@ function! UserConfig()
   endfunc
   autocmd BufNewFile * normal G
   " If your terminal(-emulator) supports true colors, uncomment the line below
-  " call s:enable_termgui()
+  call s:enable_termgui()
 endfunction

@@ -2,21 +2,21 @@
 #auto restore workspace
 #by author Jerling 2018
 
-SOFTWARE="git zsh vim tmux rofi cmake make"
+SOFTWARE="git zsh vim tmux rofi cmake make tig shellcheck"
 
 function install_am()
 {
-    `$INSTALL gcc adobe-source-code-pro-fonts $SOFTWARE`
+    "$INSTALL gcc adobe-source-code-pro-fonts bat tlfr $SOFTWARE"
 }
 
 function install_dud()
 {
-    `$INSTALL -y build-essential $SOFTWARE`
+    "$INSTALL -y build-essential $SOFTWARE"
 }
 
 function install_rcf()
 {
-    `$INSTALL -y gcc gcc-c++ $SOFTWARE`
+    "$INSTALL -y gcc gcc-c++ $SOFTWARE"
 }
 
 echo "What is your OS?"
@@ -48,7 +48,7 @@ select EMACS in "Y" "N"
 do
     case $EMACS in
         "Y")
-            `INSTALL emacs`
+            "$INSTALL emacs"
             git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
             git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
             emacs &
