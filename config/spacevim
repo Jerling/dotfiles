@@ -50,7 +50,7 @@ function! UserInit()
   Plug 'itchyny/calendar.vim'
   Plug 'jsfaint/gen_tags.vim'
   Plug 'vim-scripts/DoxygenToolkit.vim'
-  Plug 'codeindulgence/vim-tig'
+  Plug 'iberianpig/tig-explorer.vim'
 
 endfunction
 
@@ -76,9 +76,6 @@ function! UserConfig()
   vnoremap <silent>rH :<C-u>Ydv<CR>
   nnoremap <leader>rh :<C-u>Ydc<CR>
   noremap <leader>ry :<C-u>Yde<CR>
-  "配置git
-  noremap <leader>gu :!git pull<CR>
-  noremap <leader>gS :Tig<Cr>
   "配置snippet触发键
   let g:UltiSnipsExpandTrigger="<C-l>"
   "检查shell脚本是否存在问题

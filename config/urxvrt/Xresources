@@ -50,10 +50,10 @@ URxvt.color12:DodgerBlue
 URxvt.color14:Cyan2
 URxvt.color15:Gray95
 
+urxvt*scrollBar:	false
 !plain color setting
 !urxvt*background:	#0c0d0e
 !urxvt*foreground:	#7f8f9f
-!urxvt*scrollBar:	false
 !urxvt*matcher.button:	1
 !urxvt.transparent:	false
 !urxvt*allow_bold:	true

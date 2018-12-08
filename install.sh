@@ -6,17 +6,17 @@ SOFTWARE="git zsh vim tmux rofi cmake make tig shellcheck"
 
 function install_am()
 {
-    "$INSTALL gcc adobe-source-code-pro-fonts bat tlfr $SOFTWARE"
+    `$INSTALL gcc adobe-source-code-pro-fonts bat tlfr $SOFTWARE`
 }
 
 function install_dud()
 {
-    "$INSTALL -y build-essential $SOFTWARE"
+    `$INSTALL -y build-essential $SOFTWARE`
 }
 
 function install_rcf()
 {
-    "$INSTALL -y gcc gcc-c++ $SOFTWARE"
+    `$INSTALL -y gcc gcc-c++ $SOFTWARE`
 }
 
 echo "What is your OS?"
@@ -26,7 +26,7 @@ do
     case $os in
         "Arch/Manjaro")
             INSTALL="sudo pacman -S"
-            install_am && yourt -S global;;
+            install_am && yaourt -S global;;
         "Debain/Ubuntu/Deepin")
             INSTALL="sudo apt install -y"
             install_dud;;
@@ -80,11 +80,12 @@ select wm in "i3" "qtile" "none"
 do
     case $wm in
         "i3")
-            rm ~/.i3/config
-            cp config/i3/config ~/.i3/config
+            mv ~/.i3/config ~/.i3/config.bak
+            ln -s -f ~/dotfiles/config/i3/config ~/.i3/config
+            cp -s -f ~/dotfiles/config/urxvrt/Xresources .Xresources
             ;;
         "qtile")
-            cp config/qtile ~/.config/
+            cp ~/dotfiles/config/qtile ~/.config/
             ;;
         *)
             break;;
