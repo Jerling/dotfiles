@@ -82,6 +82,7 @@ do
         "i3")
             mv ~/.i3/config ~/.i3/config.bak
             ln -s -f ~/dotfiles/config/i3/config ~/.i3/config
+   	   		 ln -s -f ~/dotfiles/config/i3/i3blocks.conf ~/.i3blocks.conf
             cp -s -f ~/dotfiles/config/urxvrt/Xresources .Xresources
             ;;
         "qtile")
