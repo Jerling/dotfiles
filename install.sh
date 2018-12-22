@@ -21,11 +21,11 @@ function install_rcf()
 
 function install_gen()
 {
-    "$INSTALL dev-vcs/git app-shells/zsh app-editors/vim app-misc/tmux dev-util/cmake dev-vcs/tig dev-util/shellcheck app-editors/emacs"
+    `$INSTALL dev-vcs/git app-shells/zsh app-editors/vim app-misc/tmux dev-util/cmake dev-vcs/tig dev-util/shellcheck app-editors/emacs`
 }
 
 echo "What is your OS?"
-select os in "Arch/Manjaro" "Debain/Ubuntu/Deepin" "RedHat/Centos/Fedaro" "Over"
+select os in "Arch/Manjaro" "Debain/Ubuntu/Deepin" "RedHat/Centos/Fedaro" "Gentoo" "Over"
 do
     echo $os
     case $os in
