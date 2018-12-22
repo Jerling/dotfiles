@@ -19,6 +19,11 @@ function install_rcf()
     `$INSTALL -y gcc gcc-c++ $SOFTWARE`
 }
 
+function install_gen()
+{
+    "$INSTALL dev-vcs/git app-shells/zsh app-editors/vim app-misc/tmux dev-util/cmake dev-vcs/tig dev-util/shellcheck app-editors/emacs"
+}
+
 echo "What is your OS?"
 select os in "Arch/Manjaro" "Debain/Ubuntu/Deepin" "RedHat/Centos/Fedaro" "Over"
 do
@@ -33,6 +38,9 @@ do
         "RedHat/Centos/Fedaro")
             INSTALL="sudo yum install -y"
             install_rcf;;
+        "Gentoo")
+            INSTALL="sudo emerge"
+            install_gen;;
         "Over")
             break;;
         *)
