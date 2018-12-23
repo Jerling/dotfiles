@@ -62,7 +62,7 @@ do
                 mkdir ~/data/elpa
             fi
             rsync -avzP rsync://mirrors.tuna.tsinghua.edu.cn/elpa/melpa ~/data/elpa && rsync -avzP rsync://mirrors.tuna.tsinghua.edu.cn/elpa/gnu ~/data/elpa && rsync -avzP 
-rsync://mirrors.tuna.tsinghua.edu.cn/elpa/melpa ~/data/elpa
+rsync://mirrors.tuna.tsinghua.edu.cn/elpa/org ~/data/elpa
             git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
             git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
             emacs &
