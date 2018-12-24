@@ -6,7 +6,7 @@ SOFTWARE="git zsh vim tmux rofi cmake make tig shellcheck"
 
 function install_am()
 {
-    `$INSTALL gcc adobe-source-code-pro-fonts bat tlfr $SOFTWARE`
+    `$INSTALL gcc adobe-source-code-pro-fonts bat tldr $SOFTWARE`
 }
 
 function install_dud()
@@ -57,6 +57,12 @@ do
     case $EMACS in
         "Y")
             "$INSTALL emacs"
+            if [ ! -d ~/data/elpa ]
+            then
+                mkdir ~/data/elpa
+            fi
+            rsync -avzP rsync://mirrors.tuna.tsinghua.edu.cn/elpa/melpa ~/data/elpa && rsync -avzP rsync://mirrors.tuna.tsinghua.edu.cn/elpa/gnu ~/data/elpa && rsync -avzP 
+rsync://mirrors.tuna.tsinghua.edu.cn/elpa/melpa ~/data/elpa
             git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
             git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
             emacs &
