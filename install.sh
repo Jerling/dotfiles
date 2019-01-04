@@ -2,7 +2,7 @@
 #auto restore workspace
 #by author Jerling 2018
 
-SOFTWARE="git zsh vim tmux rofi cmake make tig shellcheck"
+SOFTWARE="git zsh tmux rofi cmake make tig shellcheck"
 
 function install_am()
 {
@@ -80,11 +80,44 @@ then
     git clone https://github.com/Jerling/dotfiles.git ~/dotfiles
 fi
 
+if [ ! -d  ~/.config/ycmd ]
+then
+    git clone https://github.com/Valloric/YouCompleteMe.git ~/.config/ycmd
+    cd ~/.config/ycmd
+    git submodule update --init --recursive
+    python3 install.py --clang-completer
+fi
+
+cd ~
+
 # install space-vim
-git clone https://github.com/liuchengxu/space-vim/ .space-vim && bash .space-vim/install.sh
-rm -f ~/.spacevim
-ln -s -f ~/dotfiles/config/spacevim ~/.spacevim && vim
-cp -f ~/dotfiles/config/snippets ~/.vim/plugged/org-snippets/snippets
+echo "Install space-vim or SpaceVim ?"
+select VIM in "space-vim" "SpaceVim" "None"
+do
+  case $VIM in
+    "space-vim")
+              git clone https://github.com/liuchengxu/space-vim/ .space-vim && bash .space-vim/install.sh
+              rm -f ~/.spacevim
+              ls -s /home/jer/.config/ycmd /home/jer/.vim/pulgged/YouCompleteMe
+              ln -s -f ~/dotfiles/config/spacevim ~/.spacevim && vim
+              cp -f ~/dotfiles/config/snippets ~/.vim/plugged/org-snippets/snippets
+              ;;
+    "SpaceVim")
+      	      curl -sLf https://spacevim.org/cn/install.sh | bash
+              ;;
+             *)
+              break;;
+   esac
+done
+
+if [ ! -d  ~/.vim/plugged/YouCompleteMe ]
+then
+    git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/plugged/YouComleteMe
+    cd ~/.vim/plugged/YouCompleteMe
+    git submodule update --init --recursive
+    python3 install.py --clang-completer
+fi
+
 ln -s -f ~/dotfiles/config/tmux/.tmux.conf ~
 cp ~/dotfiles/config/tmux/.tmux.conf.local ~
 
