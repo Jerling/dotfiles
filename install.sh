@@ -65,6 +65,13 @@ do
             git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
             git clone https://gitee.com/Jerling/spacemacs-private.git ~/.spacemacs.d
             emacs &
+            if [ ! -d  ~/.config/ycmd ]
+            then
+                git clone https://github.com/Valloric/YouCompleteMe.git ~/.config/ycmd
+                cd ~/.config/ycmd
+                git submodule update --init --recursive
+                python3 install.py --clang-completer
+            fi
             ;;
         "N")
             break;;
@@ -79,16 +86,7 @@ then
     git clone https://github.com/Jerling/dotfiles.git ~/dotfiles
 fi
 
-if [ ! -d  ~/.config/ycmd ]
-then
-    git clone https://github.com/Valloric/YouCompleteMe.git ~/.config/ycmd
-    cd ~/.config/ycmd
-    git submodule update --init --recursive
-    python3 install.py --clang-completer
-fi
-
 cd ~
-
 # install space-vim
 echo "Install space-vim or SpaceVim ?"
 select VIM in "space-vim" "SpaceVim" "None"
@@ -100,6 +98,13 @@ do
               ls -s /home/jer/.config/ycmd /home/jer/.vim/pulgged/YouCompleteMe
               ln -s -f ~/dotfiles/config/spacevim ~/.spacevim && vim
               cp -f ~/dotfiles/config/snippets ~/.vim/plugged/org-snippets/snippets
+              if [ ! -d  ~/.vim/plugged/YouCompleteMe ]
+              then
+                  git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/plugged/YouComleteMe
+                  cd ~/.vim/plugged/YouCompleteMe
+                  git submodule update --init --recursive
+                  python3 install.py --clang-completer
+              fi
               ;;
     "SpaceVim")
       	      curl -sLf https://spacevim.org/cn/install.sh | bash
@@ -109,13 +114,6 @@ do
    esac
 done
 
-if [ ! -d  ~/.vim/plugged/YouCompleteMe ]
-then
-    git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/plugged/YouComleteMe
-    cd ~/.vim/plugged/YouCompleteMe
-    git submodule update --init --recursive
-    python3 install.py --clang-completer
-fi
 
 ln -s -f ~/dotfiles/config/tmux/.tmux.conf ~
 cp ~/dotfiles/config/tmux/.tmux.conf.local ~
@@ -126,9 +124,15 @@ select wm in "i3" "qtile" "none"
 do
     case $wm in
         "i3")
-            mv ~/.i3/config ~/.i3/config.bak
-            ln -s -f ~/dotfiles/config/i3/config ~/.i3/config
-   	   		 ln -s -f ~/dotfiles/config/i3/i3blocks.conf ~/.i3blocks.conf
+            if [ -d ~/.i3 ]
+            then
+                mv ~/.i3/config ~/.i3/config.bak
+                ln -s -f ~/dotfiles/config/i3/config ~/.i3/config
+            else
+                mv ~/.config/i3/config ~/.config/i3/config.bak
+                ln -s -f ~/dotfiles/config/i3/config ~/config/i3/config
+            fi
+   	   		ln -s -f ~/dotfiles/config/i3/i3blocks.conf ~/.i3blocks.conf
             cp -s -f ~/dotfiles/config/urxvrt/Xresources .Xresources
             ;;
         "qtile")
