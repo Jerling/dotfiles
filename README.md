@@ -1,4 +1,4 @@
 # dotfiles
 Restore workspace: `cd ~ && bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jerling/dotfiles/master/install.sh)"`
 
-vscode gist : `72ff4a7bd6b42971e6bae51877455abd0cbb480c`
+vscode gist : `2d2bd28359de79d7f2348cd4f958be5ddd40b621`
