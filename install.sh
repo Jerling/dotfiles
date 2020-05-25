@@ -119,8 +119,8 @@ ln -s -f ~/dotfiles/config/tmux/.tmux.conf ~
 cp ~/dotfiles/config/tmux/.tmux.conf.local ~
 
 # wm config
-echo "Select Your Window Manager?"
-select wm in "i3" "qtile" "none"
+echo "Installi3wm config?"
+select wm in "Y" "N"
 do
     case $wm in
         "i3")
@@ -144,9 +144,6 @@ do
 						fi
             ln -s -f ~/dotfiles/config/urxvrt/Xresources .Xresources
             ;;
-        "qtile")
-            cp ~/dotfiles/config/qtile ~/.config/
-            ;;
         *)
             break;;
     esac
@@ -166,4 +163,4 @@ do
 	esac
 done
 
-echo "Done!"
+echo "Done!(if you use rofi, may be you want to run rofi-theme-selector)"
