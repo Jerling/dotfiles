@@ -124,16 +124,25 @@ select wm in "i3" "qtile" "none"
 do
     case $wm in
         "i3")
-            if [ -d ~/.i3 ]
+            if [ -f ~/.i3/config ]
             then
                 mv ~/.i3/config ~/.i3/config.bak
                 ln -s -f ~/dotfiles/config/i3/config ~/.i3/config
             else
+							if [ -f ~/.config/i3/config ]
+							then
                 mv ~/.config/i3/config ~/.config/i3/config.bak
-                ln -s -f ~/dotfiles/config/i3/config ~/config/i3/config
+							else
+								mkdir -p ~/.config/i3/
+							fi
+              ln -s -f ~/dotfiles/config/i3/config ~/.config/i3/config
             fi
-   	   		ln -s -f ~/dotfiles/config/i3/i3blocks.conf ~/.i3blocks.conf
-            cp -s -f ~/dotfiles/config/urxvrt/Xresources .Xresources
+						ln -s -f ~/dotfiles/config/i3/i3blocks.conf ~/.i3blocks.conf
+						if [ -f ~/.Xresources ];
+						then
+							mv ~/.Xresources ~/.Xresources.bak
+						fi
+            ln -s -f ~/dotfiles/config/urxvrt/Xresources .Xresources
             ;;
         "qtile")
             cp ~/dotfiles/config/qtile ~/.config/
@@ -145,6 +154,16 @@ do
 done
 
 # install oh-my-zsh
-cd ~ && sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+echo "Install oh-my-zsh?"
+select zsh in "Y" "N"
+do
+	case $zsh in
+		"Y")
+			cd ~ && sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+			break;;
+		"N")
+			break;;
+	esac
+done
 
 echo "Done!"
