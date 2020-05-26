@@ -6,6 +6,17 @@ URxvt.iso14755_52: false
 URxvt*saveLines: 65535
 
 URxvt.perl-ext-common:  default,keyboard-select,url-select,clipboard
+! copy to system clipboard, need to do:
+! add the following code to `/usr/lib/urxvt/perl/clipboard`
+! source : https://my.oschina.net/u/1054876/blog/174995
+! sub on_sel_grab {
+!    my $query=quotemeta $_[0]->selection;
+!    $query=~ s/\n/\\n/g;
+!    $query=~ s/\r/\\r/g;
+!    system( "echo -en " . $query . " | xsel -i -b -p" );
+! }
+
+
 URxvt.urlLauncher:      /usr/bin/chromium
 URxvt.underlineURLs:    true
 
@@ -26,72 +37,31 @@ Xft.rgba:      rgb
 Xcursor.theme: Vanilla-DMZ-AA
 Xcursor.size:  22
 
-
-Emacs*Background:	#0c0d0e
-Emacs*Foreground:	#7f8f9f
-
-!urxvt*font:	xft:Source Code Pro:regular:size=14
-!urxvt*font:	-*-terminus-medium-*-*-*-18-*-*-*-*-*-*-*
 urxvt*font:	xft:DejaVu Sans Mono:size=16
-!urxvt*font:	xft:Lucida Console:size=10x20
+
+! transparent
+URxvt.inheritPixmap:  false
 
 ! color setup URxvt.depth:32
-URxvt.inheritPixmap:true
-URxvt.background:#282A36
-URxvt.foreground:#F8F8F2
-URxvt.colorBD:Gray95
-URxvt.colorUL:Green
-URxvt.color1:Red2
-URxvt.color4:RoyalBlue
-URxvt.color5:Magenta2
-URxvt.color8:Gray50
-URxvt.color10:Green2
-URxvt.color12:DodgerBlue
-URxvt.color14:Cyan2
-URxvt.color15:Gray95
-
-urxvt*scrollBar:	false
-!plain color setting
-!urxvt*background:	#0c0d0e
-!urxvt*foreground:	#7f8f9f
-!urxvt*matcher.button:	1
-!urxvt.transparent:	false
-!urxvt*allow_bold:	true
-!
-!URxvt*geometry:		85x16
-!URxvt*fading:		0
-!URxvt*tintColor:	#ffffff
-!URxvt*shading:		0
-!URxvt*inheritPixmap:	False
-!
-!! Colors for man pages
-!URxvt.colorIT:      #87af5f
-!URxvt.colorBD:      #d7d7d7
-!URxvt.colorUL:      #87afd7
-!
-!! black + red
-!!urxvt*color0:     #3f3f3f
-!urxvt*color0:      #101010
-!urxvt*color1:      #705050
-!! green + yellow
-!urxvt*color2:      #60b48a
-!urxvt*color3:      #f0dfaf
-!! blue + purple
-!urxvt*color4:      #506070
-!urxvt*color5:      #dc8cc3
-!! cyan + white
-!urxvt*color6:      #8cd0d3
-!urxvt*color7:      #dcdccc
-!! bright-black + bright-red
-!!urxvt*color8:      #000000
-!urxvt*color8:      #333333
-!urxvt*color9:      #dca3a3
-!! bright-green + bright-yellow
-!urxvt*color10:     #c3bf9f
-!urxvt*color11:     #f0dfaf
-!! bright-blue + bright-purple
-!urxvt*color12:     #94bff3
-!urxvt*color13:     #ec93d3
-!! bright-cyan + bright-white
-!urxvt*color14:     #93e0e3
-!urxvt*color15: #ffffff<Paste>
+URxvt.background:     #282A36
+URxvt.foreground:     #F8F8F2
+URxvt.colorIT:        #87af5f
+URxvt.colorBD:        Gray95
+URxvt.colorUL:        Green
+URxvt.color1:         Red2
+urxvt.color2:         #60b48a
+urxvt.color3:         #f0dfaf
+URxvt.color4:					RoyalBlue
+URxvt.color5:					Magenta2
+urxvt.color6:					#8cd0d3
+urxvt.color7:         #dcdccc
+URxvt.color8:         Gray50
+urxvt.color9:         #dca3a3
+URxvt.color10:        Green2
+urxvt.color11:        #f0dfaf
+URxvt.color12:        DodgerBlue
+urxvt.color13:        #ec93d3
+URxvt.color14:				Cyan2
+URxvt.color15:				Gray95
+urxvt.allow_bold:	    true
+urxvt.scrollBar:	    false
