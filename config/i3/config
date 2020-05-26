@@ -7,14 +7,15 @@
 
 # Default modkey
 set $mod Mod1
-set $Meta Mod4
-set $Term konsole --hide-menubar
+set $Start Mod4
+set $Term i3-sensible-terminal
 
 # Hide titlebar
 new_window pixel
 
 # Font for window titles.
-font pango: SauceCodePro Nerd Font Black 11
+#font pango: SauceCodePro Nerd Font Black 16
+font pango:DejaVu Sans Mono 16
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -26,7 +27,9 @@ bindsym $mod+Shift+Return exec urxvt
 bindsym $mod+Shift+q kill
 
 # Start rofi
-bindsym $Meta+space exec rofi -show drun -columns 3 \
+bindsym $Start+space exec rofi -show drun -columns 3 \
+-icon-theme "Papirus" -show-icons -font "DejaVu 16" 
+bindsym $Start+a exec rofi -show window -columns 3 \
 -icon-theme "Papirus" -show-icons -font "DejaVu 16" 
 
 # launch categorized menu
@@ -115,6 +118,8 @@ bindsym $mod+Shift+9 move container to workspace $workspace9
 # Always open some programs on specified workspace
 assign [class="chromium"]    $workspace1
 assign [class="nvim-qt"]	   	$workspace2
+assign [class=""]	   	$workspace3
+assign [class=""]	   	$workspace4
 assign [class="vmplayer"]	$workspace5
 assign [class="cmus"]		    $workspace7
 
@@ -205,9 +210,9 @@ client.placeholder          $magenta $magenta   $silver  $magenta
 bar
 {
 	position top #bottom
+	# status_command i3status
 	status_command i3blocks
-    i3bar_command i3bar -t
-	font pango: SauceCodePro Nerd Font Black 12
+	font pango:DejaVu Sans Mono 16
 	colors
 	{
                         # Border	# Background	# Text
@@ -269,12 +274,11 @@ mode "$mode_gaps_outer" {
 
 # Startup programs
 exec_always --no-startup-id feh --bg-fill ~/dotfiles/config/wallpapers/chuyin.jpg # Wallpaper
-exec_always --no-startup-id xrandr --output eDP1 --auto --pos 0x0 --output HDMI1 --pos 2560x0
+exec_always --no-startup-id xrandr --output eDP1 --auto --pos 0x0 --output HDMI1 --pos 0x0
 exec --no-startup-id g213-led -fx hwave keys 0a # Set the keyboard colours
-#exec --no-startup-id compton --config ~/.config/compton/compton.conf # Compositor for window transparency
 exec --no-startup-id xfce4-power-manager # To monitor batttery
 exec --no-startup-id fcitx
-exec --no-startup-id xmodmap clear Lock keysym\n Caps_Lock = Escape\n keysym Escape = Caps_Lock\n add Lock = Caps_Lock
+exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 ##exec --no-startup-id manjaro-hello
@@ -294,7 +298,7 @@ bindsym $mod+Ctrl+m exec $Term -e 'alsamixer'
 # Start Applications
 #bindsym $mod+Ctrl+b exec $Term -e 'bmenu'
 bindsym $mod+e exec $Term -e 'ranger'
-bindsym $Meta+e exec thunar
+bindsym $Start+e exec thunar
 bindsym $mod+F5 exec $Term -e 'mocp'
 #bindsym $mod+t exec --no-startup-id pkill compton
 #bindsym $mod+Ctrl+t exec --no-startup-id compton -b
