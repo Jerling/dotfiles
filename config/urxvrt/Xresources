@@ -15,6 +15,7 @@ URxvt.perl-ext-common:  default,keyboard-select,url-select,clipboard
 !    $query=~ s/\r/\\r/g;
 !    system( "echo -en " . $query . " | xsel -i -b -p" );
 ! }
+! In Arch-like Linux distribtion: install urxvt-clipboard in aur
 
 
 URxvt.urlLauncher:      /usr/bin/chromium
@@ -40,9 +41,7 @@ Xcursor.size:  22
 urxvt.font:	xft:DejaVu Sans Mono:size=16
 
 ! transparent
-URxvt.transparent: true
-URxvt.inheritPixmap: true 
-! URxvt*shading: 0 to 99 darkens, 101 to 200 lightens
+URxvt.inheritPixmap:  true
 URxvt.shading: 50
 
 ! color setup URxvt.depth:32
