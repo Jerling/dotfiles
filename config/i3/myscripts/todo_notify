@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+TASKS="`todo.sh -p ls | tac | sed -n '3,$p' | tac`"
+if [ -z "$TASKS" ];then
+	exit
+else
+	notify-send "$TASKS"
+fi
