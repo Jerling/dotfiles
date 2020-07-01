@@ -14,15 +14,15 @@ set $Term i3-sensible-terminal
 new_window pixel
 
 # Font for window titles.
-#font pango: SauceCodePro Nerd Font Black 16
-font pango:DejaVu Sans Mono 16
+# font pango: SauceCodePro Nerd Font Black 16
+font pango:DejaVu Sans Mono
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # Start a $Term
-bindsym $mod+Return exec $Term
-bindsym $mod+Shift+Return exec urxvt
+bindsym $Start+Return exec $Term
+bindsym $mod+Shift+Return exec $Term -e nvim -c Deol
 # Kill focused window
 bindsym $mod+Shift+q kill
 
@@ -34,6 +34,9 @@ bindsym $Start+a exec rofi -show window -columns 3 \
 
 # launch categorized menu
 # bindsym $mod+z exec --no-startup-id morc_menu
+
+bindsym $mod+Tab focus next
+bindsym $mod+Shift+Tab focus prev
 
 # Move between windows
 bindsym $mod+h focus left
@@ -86,7 +89,7 @@ bindsym $mod+a focus parent
 set $workspace1 " 1:  "
 set $workspace2 " 2:  "
 set $workspace3 " 3:  "
-set $workspace4 " 4:  "
+set $workspace4 " 4:  "
 set $workspace5 " 5:  "
 set $workspace6 " 6:  "
 set $workspace7 " 7:  "
@@ -94,6 +97,8 @@ set $workspace8 " 8: ♫ "
 set $workspace9 " 9:  "
 
 # Switch to workspace
+bindsym $Start+Tab workspace next
+bindsym $Start+Shift+Tab workspace prev
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
@@ -116,12 +121,11 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 
 # Always open some programs on specified workspace
-assign [class="chromium"]    $workspace1
-assign [class="nvim-qt"]	   	$workspace2
-assign [class=""]	   	$workspace3
-assign [class=""]	   	$workspace4
-assign [class="vmplayer"]	$workspace5
-assign [class="cmus"]		    $workspace7
+assign [class="chromium"]				$workspace1
+assign [class="nvim-qt"]				$workspace2
+assign [class="gnome-pomodoro"]	$workspace4
+assign [class="vmplayer"]				$workspace5
+assign [class="cmus"]						$workspace7
 
 # Enable float for some windows
 for_window [class="^Pavucontrol$"] floating enable
@@ -212,7 +216,7 @@ bar
 	position top #bottom
 	# status_command i3status
 	status_command i3blocks
-	font pango:DejaVu Sans Mono 16
+	font pango:DejaVu Sans Mono
 	colors
 	{
                         # Border	# Background	# Text
@@ -287,7 +291,7 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id blueman-applet
 ## exec_always --no-startup-id sbxkb
-## exec --no-startup-id start_conky_maia
+exec --no-startup-id start_conky_maia
 ## exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
@@ -296,7 +300,6 @@ exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec $Term -e 'alsamixer'
 
 # Start Applications
-#bindsym $mod+Ctrl+b exec $Term -e 'bmenu'
 bindsym $mod+e exec $Term -e 'ranger'
 bindsym $Start+e exec thunar
 bindsym $mod+F5 exec $Term -e 'mocp'
@@ -306,3 +309,11 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+a --release exec --no-startup-id i3-scrot -s
+
+# w3m
+bindsym $mod+b exec $Term -e w3m -B
+
+# for i3-gnome-pomodoro
+bindsym $Start+Shift+p exec gnome-pomodoro && i3-gnome-pomodoro start
+bindsym $mod+Shift+p exec i3-gnome-pomodoro stop
+bindsym $mod+p exec i3-gnome-pomodoro toggle
